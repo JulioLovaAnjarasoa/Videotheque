@@ -6,7 +6,7 @@ class Controller
     {
     }
 
-    public function index()
+    public static function index()
     {
     }
 }
