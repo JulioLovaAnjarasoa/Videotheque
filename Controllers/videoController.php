@@ -13,7 +13,7 @@ class VideoController
     {
         $endpoint = 'discover/movie';
         $data = $this->tmdbAPI->get_from_api($endpoint);
-        return json_decode($data);
+        return json_decode($data)->results;
     }
 
     public function get_movies_types()
@@ -21,5 +21,12 @@ class VideoController
         $endpoint = "genre/movie/list";
         $data = $this->tmdbAPI->get_from_api($endpoint);
         return json_decode($data)->genres;
+    }
+
+    public function get_top_rated_movies()
+    {
+        $endpoint = "movie/top_rated";
+        $data = $this->tmdbAPI->get_from_api($endpoint);
+        return json_decode($data)->results;
     }
 }

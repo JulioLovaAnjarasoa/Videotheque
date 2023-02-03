@@ -15,7 +15,9 @@ class Controller
 
     public function index()
     {
-        $movies_Genres = $this->video_controller->get_movies_types();
-        $this->layout->index($movies_Genres);
+        $datas['types'] = $this->video_controller->get_movies_types();
+        $datas['movies'] = $this->video_controller->get_videos();
+        $datas['popular_movies'] = $this->video_controller->get_top_rated_movies();
+        $this->layout->index($datas);
     }
 }
