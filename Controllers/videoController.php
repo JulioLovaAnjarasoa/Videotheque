@@ -29,4 +29,12 @@ class VideoController
         $data = $this->tmdbAPI->get_from_api($endpoint);
         return json_decode($data)->results;
     }
+
+    public function get_movies_by_genres($genre_id)
+    {
+        $endpoint = "discover/movie";
+        $query[] = ["with_genres", $genre_id];
+        $data = $this->tmdbAPI->get_from_api($endpoint, $query);
+        return json_decode($data)->results;
+    }
 }

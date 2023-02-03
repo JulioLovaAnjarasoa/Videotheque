@@ -12,9 +12,17 @@ class TMDBApi
         $this->api_key = $_ENV['API_KEY'];
         $this->api_url = $_ENV['API_URL'];
     }
-    public function get_from_api($endpoint)
+    public function get_from_api($endpoint, $queries = null)
     {
-        $url = $this->api_url . '/' . $endpoint . '?api_key=' . $this->api_key;
+        if (!is_null($queries)) {
+            $queryString = "&";
+            foreach ($queries as $query) {
+                $queryString .= implode("=", $query);
+                $queryString .= "&";
+            }
+        }
+
+        $url = $this->api_url . '/' . $endpoint . '?api_key=' . $this->api_key . '' . $queryString;
         $curl_handle = curl_init();
         curl_setopt($curl_handle, CURLOPT_URL, $url);
         curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, true);

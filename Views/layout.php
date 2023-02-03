@@ -54,7 +54,7 @@ class Layout
                             <?php
                             foreach ($datas['types'] as $type) {
                             ?><li class="nav-item">
-                                    <a href="?genre=<?php echo $type->id; ?>" class="nav-link align-middle px-0">
+                                    <a href="?genre=<?php echo $type->id; ?>&type=<?php echo $type->name ?>" class="nav-link align-middle px-0">
                                         <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline"><?php echo $type->name; ?></span>
                                     </a>
                                 </li>
@@ -66,32 +66,43 @@ class Layout
                     </div>
                 </div>
                 <div class="col py-3">
-                    <div class="jumbotron jumbotron-fluid">
-                        <div class="container">
-                            <h1 class="display-4">Top rated movies</h1>
-                            <!-- <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p> -->
-                            <div class="row">
-                                <?php
-                                foreach ($datas['popular_movies'] as $movie) {
-                                ?>
-                                    <div class="col-2 card">
-                                        <a href=""><img src="https://image.tmdb.org/t/p/original/<?php echo $movie->poster_path ?>" class="img-fluid rounded-start" alt="..."></a>
+                    <?php
+                    if ($datas['popular_movies']) {
+                    ?>
+                        <div class="jumbotron jumbotron-fluid">
+                            <div class="container">
+                                <h1 class="display-4">Top rated movies</h1>
+                                <!-- <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p> -->
+                                <div class="row">
+                                    <?php
+                                    $movies = $datas['popular_movies'];
+                                    $i = 0;
+                                    while ($i < 6) {
+                                    ?>
+                                        <div class="col-2 card">
+                                            <a href=""><img src="https://image.tmdb.org/t/p/original/<?php echo $movies[$i]->poster_path ?>" class="img-fluid rounded-start" alt="..."></a>
 
-                                    </div>
-                                <?php
-                                }
-                                ?>
+                                        </div>
+                                    <?php
+                                        $i++;
+                                    }
+                                    ?>
+                                </div>
+
                             </div>
-
                         </div>
-                    </div>
+                    <?php
+                    }
+                    ?>
 
                     <div class="row">
-                        <h1>Discover Movies</h1>
+                        </br>
+                        </br>
+                        <h1><?php echo $datas['type']; ?> Movies</h1>
                         <?php
                         foreach ($datas['movies'] as $movie) {
                         ?>
-                            <div class="col-4 card mb-2">
+                            <div class="col-2 card">
                                 <div class="">
                                     <a href=""><img src="https://image.tmdb.org/t/p/original/<?php echo $movie->poster_path ?>" class="img-fluid rounded-start" alt="..."></a>
                                 </div>
