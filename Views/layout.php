@@ -146,7 +146,7 @@ class Layout
                                         <input type="password" class="form-control" id="inputPassword" name="inputPassword">
                                     </div>
                                 </div>
-                                <div class="mb-3"> <button v-on:click.stop.prevent="submit" class="btn btn-dark w-100">Login</button> </div>
+                                <div class="mb-3"> <button class="btn btn-dark w-100">Login</button> </div>
                             </form>
                         </div>
                     </div>
