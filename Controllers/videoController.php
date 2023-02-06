@@ -1,5 +1,5 @@
 <?php
-require $_SERVER['DOCUMENT_ROOT'] . '/Videotheque/API/api.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/Videotheque/Modeles/api.php';
 
 class VideoController
 {

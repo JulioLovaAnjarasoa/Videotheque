@@ -1,9 +1,5 @@
 <?php
 
-
-// require $_SERVER['DOCUMENT_ROOT'] . '/Videotheque/Views/scripts.php';
-// require $_SERVER['DOCUMENT_ROOT'] . '/Videotheque/Controllers/videoController.php';
-
 class Layout
 {
     public function index($datas)
@@ -125,6 +121,39 @@ class Layout
                 ?>
             </div>
         </div>
+    <?php
+    }
+
+    public function login_or_register()
+    {
+        $this->get_header();
+    ?>
+        <div class="container mt-5">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-6">
+                    <div class="card px-5 py-5" id="form1">
+                        <div class="form-data">
+                            <form action="" method="POST">
+                                <div class="mb-3 row">
+                                    <label for="inputPassword" class="col-sm-2 col-form-label">E-Mail</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" id="inputEmail" name="inputEmail">
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control" id="inputPassword" name="inputPassword">
+                                    </div>
+                                </div>
+                                <div class="mb-3"> <button v-on:click.stop.prevent="submit" class="btn btn-dark w-100">Login</button> </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 <?php
+        $this->get_footer();
     }
 }
