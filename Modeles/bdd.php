@@ -34,6 +34,12 @@ class App_DB
     public function insert_into_db($table, array $params = [])
     {
         $query = "INSERT INTO " . $table . " (" . implode(',', array_keys($params)) . ") VALUES (" .  "'" . implode("', '", array_values($params)) . "'" . ")";
-        return $this->db->query($query);
+        $this->db->query($query);
+        return $this->db->insert_id;
+    }
+
+    public function get_user_from_db($id)
+    {
+        return $this->db->query("SELECT * FROM User WHERE id=" . $id . "");
     }
 }

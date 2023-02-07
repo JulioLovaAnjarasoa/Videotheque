@@ -22,15 +22,16 @@ class UserController
             "mail" => $_POST['inputEmail'],
             "pwd" => password_hash($_POST['inputPassword'], PASSWORD_DEFAULT),
         ];
-        if ($this->db->insert_into_db($this->table, $params)) {
-            $_SESSION['token'] = "";
-            // $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+        $insert_id = $this->db->insert_into_db($this->table, $params);
+        if ($insert_id) {
+            $user_response = $this->db->get_user_from_db($insert_id);
+            $user = $user_response->fetch_assoc();
+            $_SESSION['token'] = $user['pwd'];
             if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
                 $redirect = "https://";
             } else {
                 $redirect = "http://";
             }
-
             $redirect .= "" . $_SERVER['SERVER_NAME'] . "/Videotheque";
             header('Location: ' . $redirect);
         }

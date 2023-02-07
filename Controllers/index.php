@@ -14,6 +14,7 @@ class Controller
         $this->video_controller = new VideoController();
         $this->user_controller = new UserController();
         $this->layout = new Layout();
+        session_start();
     }
 
     public function index()
