@@ -1,9 +1,5 @@
 <?php
 
-
-// require $_SERVER['DOCUMENT_ROOT'] . '/Videotheque/Views/scripts.php';
-// require $_SERVER['DOCUMENT_ROOT'] . '/Videotheque/Controllers/videoController.php';
-
 class Layout
 {
     public function index($datas)
@@ -45,6 +41,7 @@ class Layout
 
     public function main_page($datas)
     {
+        $this->get_navbar();
     ?>
         <div class="container-fluid">
             <div class="row flex-nowrap">
@@ -63,6 +60,7 @@ class Layout
                             ?>
                         </ul>
                         <hr>
+                        <a href="?action=logout" class="btn btn-dark w-100">Log Out</a>
                     </div>
                 </div>
                 <div class="col py-3">
@@ -125,6 +123,80 @@ class Layout
                 ?>
             </div>
         </div>
+    <?php
+    }
+
+    public function login_or_register($action = null)
+    {
+        $this->get_header();
+    ?>
+        <div class="container mt-5">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-6">
+                    <div class="card px-5 py-5" id="form1">
+                        <div class="form-data">
+                            <form action="" method="POST">
+                                <?php
+                                if ($action == 'register') {
+                                ?>
+                                    <div class="mb-3 row">
+                                        <label for="inputFirstName" class="col-sm-2 col-form-label">First Name</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="inputFirstName" name="inputFirstName">
+                                            <input type="hidden" class="form-control" id="inputRegister" name="inputRegister" value="register">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="inputLastName" class="col-sm-2 col-form-label">Last Name</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="inputLastName" name="inputLastName">
+                                        </div>
+                                    </div>
+                                <?php
+                                }
+                                ?>
+                                <div class="mb-3 row">
+                                    <label for="inputEmail" class="col-sm-2 col-form-label">E-Mail</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" id="inputEmail" name="inputEmail">
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control" id="inputPassword" name="inputPassword">
+                                    </div>
+                                </div>
+                                <?php
+                                if ($action == 'register') {
+                                ?>
+                                    <div class="mb-3"> <button class="btn btn-dark w-100">Register</button> </div>
+                                <?php
+                                } else {
+                                ?>
+                                    <div class="mb-3 row">
+                                        <p>click here <a href="?action=register"> to register</a></p>
+                                    </div>
+                                    <div class="mb-3"> <button class="btn btn-dark w-100">Login</button> </div>
+                                <?php } ?>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php
+        $this->get_footer();
+    }
+
+    public function get_navbar()
+    {
+    ?>
+        <nav class="navbar navbar-dark bg-dark">
+            <div class="container-fluid">
+                <p class="text-white h4 inline"><?php echo $_SESSION['usr_last_name'] . '   ' . $_SESSION['usr_first_name']; ?></p>
+            </div>
+        </nav>
 <?php
     }
 }
