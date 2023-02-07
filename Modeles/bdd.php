@@ -38,8 +38,13 @@ class App_DB
         return $this->db->insert_id;
     }
 
-    public function get_user_from_db($id)
+    public function get_user_by_id_from_db($id)
     {
         return $this->db->query("SELECT * FROM User WHERE id=" . $id . "");
+    }
+
+    public function get_user_by_mail_from_db($mail)
+    {
+        return $this->db->query("SELECT * FROM User WHERE mail='" . $mail . "'");
     }
 }

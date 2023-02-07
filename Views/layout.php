@@ -41,6 +41,7 @@ class Layout
 
     public function main_page($datas)
     {
+        $this->get_navbar();
     ?>
         <div class="container-fluid">
             <div class="row flex-nowrap">
@@ -59,6 +60,7 @@ class Layout
                             ?>
                         </ul>
                         <hr>
+                        <a href="?action=logout" class="btn btn-dark w-100">Log Out</a>
                     </div>
                 </div>
                 <div class="col py-3">
@@ -183,7 +185,18 @@ class Layout
                 </div>
             </div>
         </div>
-<?php
+    <?php
         $this->get_footer();
+    }
+
+    public function get_navbar()
+    {
+    ?>
+        <nav class="navbar navbar-dark bg-dark">
+            <div class="container-fluid">
+                <p class="text-white h4 inline"><?php echo $_SESSION['usr_last_name'] . '   ' . $_SESSION['usr_first_name']; ?></p>
+            </div>
+        </nav>
+<?php
     }
 }

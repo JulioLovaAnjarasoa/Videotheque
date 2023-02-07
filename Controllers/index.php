@@ -19,6 +19,9 @@ class Controller
 
     public function index()
     {
+        if (!is_null($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == 'logout') {
+            $this->user_controller->user_logout();
+        }
         if (is_null($_SESSION['token']) || empty($_SESSION['token'])) {
             if (!is_null($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == 'register') {
                 $pwd = $_POST['inputPassword'];
@@ -28,7 +31,12 @@ class Controller
                     $this->layout->login_or_register($_GET['action']);
                 }
             } else {
-                $this->layout->login_or_register();
+                $pwd = $_POST['inputPassword'];
+                if (!is_null($pwd) && !empty($pwd)) {
+                    $this->user_controller->user_login();
+                } else {
+                    $this->layout->login_or_register();
+                }
             }
         } else {
             $datas['types'] = $this->video_controller->get_movies_types();
