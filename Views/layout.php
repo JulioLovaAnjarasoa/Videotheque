@@ -124,7 +124,7 @@ class Layout
     <?php
     }
 
-    public function login_or_register()
+    public function login_or_register($action = null)
     {
         $this->get_header();
     ?>
@@ -134,8 +134,27 @@ class Layout
                     <div class="card px-5 py-5" id="form1">
                         <div class="form-data">
                             <form action="" method="POST">
+                                <?php
+                                if ($action == 'register') {
+                                ?>
+                                    <div class="mb-3 row">
+                                        <label for="inputFirstName" class="col-sm-2 col-form-label">First Name</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="inputFirstName" name="inputFirstName">
+                                            <input type="hidden" class="form-control" id="inputRegister" name="inputRegister" value="register">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="inputLastName" class="col-sm-2 col-form-label">Last Name</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="inputLastName" name="inputLastName">
+                                        </div>
+                                    </div>
+                                <?php
+                                }
+                                ?>
                                 <div class="mb-3 row">
-                                    <label for="inputPassword" class="col-sm-2 col-form-label">E-Mail</label>
+                                    <label for="inputEmail" class="col-sm-2 col-form-label">E-Mail</label>
                                     <div class="col-sm-10">
                                         <input type="email" class="form-control" id="inputEmail" name="inputEmail">
                                     </div>
@@ -146,7 +165,18 @@ class Layout
                                         <input type="password" class="form-control" id="inputPassword" name="inputPassword">
                                     </div>
                                 </div>
-                                <div class="mb-3"> <button class="btn btn-dark w-100">Login</button> </div>
+                                <?php
+                                if ($action == 'register') {
+                                ?>
+                                    <div class="mb-3"> <button class="btn btn-dark w-100">Register</button> </div>
+                                <?php
+                                } else {
+                                ?>
+                                    <div class="mb-3 row">
+                                        <p>click here <a href="?action=register"> to register</a></p>
+                                    </div>
+                                    <div class="mb-3"> <button class="btn btn-dark w-100">Login</button> </div>
+                                <?php } ?>
                             </form>
                         </div>
                     </div>

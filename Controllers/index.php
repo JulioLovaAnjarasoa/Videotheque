@@ -19,10 +19,15 @@ class Controller
     public function index()
     {
         if (is_null($_SESSION['token']) || empty($_SESSION['token'])) {
-            if (is_null($_POST['token']) || empty($_POST['token'])) {
-                $this->layout->login_or_register();
+            if (!is_null($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == 'register') {
+                $pwd = $_POST['inputPassword'];
+                if (!is_null($pwd) && !empty($pwd)) {
+                    $this->user_controller->register_user();
+                } else {
+                    $this->layout->login_or_register($_GET['action']);
+                }
             } else {
-                $this->user_controller;
+                $this->layout->login_or_register();
             }
         } else {
             $datas['types'] = $this->video_controller->get_movies_types();
